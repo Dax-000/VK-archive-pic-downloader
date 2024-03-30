@@ -14,7 +14,7 @@ def date_fmt(_date):
     _name = _spt1[0]
     _spt_date = _spt1[1].split(' ')
     _time = _spt_date[-1].replace(':', '-')
-    _new_date = f"{_spt_date[2]} {_spt_date[1]} {_spt_date[0]} {_time} ({_name}).jpg"
+    _new_date = f"{_spt_date[2]} {_spt_date[1]} {_spt_date[0]} {_time}.jpg"
     return _new_date
 
 
