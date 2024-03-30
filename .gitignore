@@ -1,4 +1,5 @@
 venv
+.idea
 input/*
 output/*
 links.txt
