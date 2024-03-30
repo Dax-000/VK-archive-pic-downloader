@@ -14,13 +14,14 @@ def date_fmt(_date):
     _spt1 = _date.split(', ')
     _name = _spt1[0]
     _spt_date = _spt1[1].split(' ')
-    _new_date = f"{_spt_date[2]} {_spt_date[1]} {_spt_date[0]} {_spt_date[-1]} ({_name})"
+    _time = _spt_date[-1].replace(':', '-')
+    _new_date = f"{_spt_date[2]} {_spt_date[1]} {_spt_date[0]} {_time} ({_name}).jpg"
     return _new_date
 
 
-def get_html_list():
+def get_html_list(_path):
     _html_list = set()
-    _htmls = os.listdir(input_path)
+    _htmls = os.listdir(_path)
     for html in _htmls:
         _html_list.add(os.path.join(input_path, html))
     return _html_list
@@ -40,18 +41,18 @@ def get_links(_file_path):
     return _got_links
 
 
-def download_links(_links, _download_path):
-    for link in _links:
-        wget.download(link, _download_path)
+def download_links(_download_path):
+    with open('links.txt', 'r') as links:
+        for string in links:
+            _spt = string.split(', ')
+            _url = _spt[0]
+            _filename = _spt[1][:-1]
+            _pic = wget.download(_url, os.path.join(_download_path, _filename))
 
 
-def download_all():
-    pass
-
-
-def get_all_links():
+def get_all_links(_path):
     _all_links = set()
-    for html in get_html_list():
+    for html in get_html_list(_path):
         _all_links.update(get_links(html))
     with open('links.txt', 'w') as f:
         for link in _all_links:
@@ -59,5 +60,5 @@ def get_all_links():
 
 
 if __name__ == "__main__":
-    get_all_links()
-    #download_links()
+    get_all_links(input_path)
+    download_links(output_path)
