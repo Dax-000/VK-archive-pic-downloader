@@ -10,7 +10,6 @@ output_path = 'output'
 
 
 def date_fmt(_date):
-    "Серафим Казачков, 19 авг 2023 в 7-32-44"
     _spt1 = _date.split(', ')
     _name = _spt1[0]
     _spt_date = _spt1[1].split(' ')
@@ -41,7 +40,13 @@ def get_links(_file_path):
     return _got_links
 
 
+def check_directory(_dir):
+    if not os.path.isdir(_dir):
+        os.mkdir(_dir)
+
+
 def download_links(_download_path):
+    check_directory(output_path)
     with open('links.txt', 'r') as links:
         for string in links:
             _spt = string.split(', ')

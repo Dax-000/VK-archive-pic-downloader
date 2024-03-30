@@ -1,5 +1,6 @@
 venv
 .idea
-input/*
+input/!messages0.html
 output/*
 links.txt
+errors.txt
