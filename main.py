@@ -47,7 +47,11 @@ def download_links(_download_path):
             _spt = string.split(', ')
             _url = _spt[0]
             _filename = _spt[1][:-1]
-            _pic = wget.download(_url, os.path.join(_download_path, _filename))
+            try:
+                wget.download(_url, os.path.join(_download_path, _filename))
+            except:
+                with open('errors.txt', 'a') as err:
+                    err.write(string)
 
 
 def get_all_links(_path):
